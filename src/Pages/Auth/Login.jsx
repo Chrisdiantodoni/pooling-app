@@ -2,20 +2,30 @@
 import React, { useState } from "react";
 import ImageLogin from "@/assets/Image-Login.png";
 import LogoPooling from "@/assets/Logo-Pooling.png";
-import {
-  AiOutlineMail,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
+import { Eye, EyeSlash, Envelope } from "@mynaui/icons-react";
 import { FiLogIn } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const Login = () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Set loading to true to show the spinner
+    setLoading(true);
+
+    // Simulate an asynchronous login process (you should replace this with your actual login logic)
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // After the login process is complete, navigate to "/home"
     navigate("/home");
+
+    // Set loading back to false after the navigation (or after your actual login logic)
+    setLoading(false);
   };
 
   return (
@@ -31,10 +41,10 @@ const Login = () => {
         <div className="md:col-span-6 sm:col-span-12 mx-5">
           <p className="font-bold text-7xl mb-2">Masuk</p>
           <p className="font-bold text-2xl mb-2">Sign in with username</p>
-          <form onSubmit={Login}>
+          <form onSubmit={handleLogin}>
             <div className="my-5 relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <AiOutlineMail className="text-gray-500" />
+                <Envelope className="text-gray-500" />
               </span>
               <input
                 placeholder="Username"
@@ -45,12 +55,12 @@ const Login = () => {
             <div className="my-5 relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                 {showPassword ? (
-                  <AiOutlineEyeInvisible
+                  <EyeSlash
                     className="text-gray-500 cursor-pointer"
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 ) : (
-                  <AiOutlineEye
+                  <Eye
                     className="text-gray-500 cursor-pointer"
                     onClick={() => setShowPassword(!showPassword)}
                   />
@@ -63,10 +73,25 @@ const Login = () => {
               />
             </div>
             <div className="my-5">
-              <button className="btn-login">
-                Masuk
-                <FiLogIn className="text-white ml-2" />
-              </button>
+              {loading ? (
+                <button
+                  className="btn-login bg-blue-300 hover:bg-blue-300"
+                  disabled
+                >
+                  <ClipLoader
+                    color={"#FFF"}
+                    loading={loading}
+                    size={24}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                  />
+                </button>
+              ) : (
+                <button className="btn-login" type="submit">
+                  Masuk
+                  <FiLogIn className="text-white ml-2" />
+                </button>
+              )}
             </div>
           </form>
         </div>
