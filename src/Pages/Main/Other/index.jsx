@@ -1,11 +1,3 @@
-import React, { Component } from "react";
+import Tenor from "./Tenor";
 
-const Home = () => {
-  return (
-    <>
-      <h1>Home</h1>
-    </>
-  );
-};
-
-export default Home;
+export { Tenor };

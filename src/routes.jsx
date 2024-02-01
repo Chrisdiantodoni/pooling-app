@@ -2,16 +2,23 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "./Pages/Auth/Login";
 import ErrorPage from "./Pages/ErrorPage";
 import DashboardLayout from "./Pages/Main";
+import { Tenor } from "./Pages/Main/Other";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/home/*",
+    path: "/*",
     element: <DashboardLayout />,
+    children: [
+      {
+        path: "tenor",
+        element: <Tenor />,
+      },
+    ],
   },
 ]);
 

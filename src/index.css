@@ -18,4 +18,7 @@
   .input-login {
     @apply pl-10 block w-full p-3 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-800;
   }
+  .sidebar-menu-item {
+    @apply flex bg-gray-50 hover:bg-gray-200 border-gray-100 border-b-2 border-t-2 my-1;
+  }
 }

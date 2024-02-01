@@ -22,7 +22,7 @@ const Login = () => {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     // After the login process is complete, navigate to "/home"
-    navigate("/home");
+    navigate("/");
 
     // Set loading back to false after the navigation (or after your actual login logic)
     setLoading(false);

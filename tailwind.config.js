@@ -8,7 +8,11 @@ export default {
       },
       colors: {
         "dark-blue": "#000B48",
-        "light-white": "rgba(255,255,255,0.17)",
+        secondary: "#C650DA",
+        danger: "#FF0F00",
+        info: "#1B59F8",
+        success: "#26CC37",
+        warning: "#EB993F",
       },
       fontFamily: {
         poppins: "Poppins",

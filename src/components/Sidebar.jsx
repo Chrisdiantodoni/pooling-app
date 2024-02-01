@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import ImageLogo from "@/assets/Logo-Dashboard.png";
 import {
@@ -10,9 +12,9 @@ import {
   Users,
   Bookmark,
 } from "@mynaui/icons-react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ title, group }) => {
   const MenuItems = [
     {
       title: "Beranda",
@@ -44,101 +46,112 @@ const Sidebar = () => {
     },
   ];
 
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeDropdown, setActiveDropdown] = useState([]);
 
-  const handleMenuItemClick = (index) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  const handleMenuItemClick = (item) => {
+    setActiveDropdown((prevDropdown) => (prevDropdown === item ? null : item));
   };
 
   const [userSetting, setUserSetting] = useState(false);
 
   const renderMenu = (item) => {
-    switch (item.title) {
-      case "Dashboard":
-        return (
-          <div className="h-auto">
-            <Link to="/home">
-              <p className="my-5">MDS</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Area</p>
-            </Link>
-          </div>
-        );
-      case "Pooling":
-        return (
-          <div className="h-auto">
-            <Link to="/home">
-              <p className="my-5">Kredit</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Leasing</p>
-            </Link>
-          </div>
-        );
-      case "Leasing":
-        return (
-          <>
-            <Link to="/home">
-              <p className="my-5">Staff Leasing</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Leasing Target</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Leasing Price List</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Leasing Surveyor</p>
-            </Link>
-          </>
-        );
-      case "Other":
-        return (
-          <>
-            <Link to="/home">
-              <p className="my-5">OTR Motor</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Promo Sales</p>
-            </Link>
-          </>
-        );
-      case "Master Data":
-        return (
-          <>
-            <Link to="/home">
-              <p className="my-5">Staff</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Tenor</p>
-            </Link>
-          </>
-        );
-      case "Laporan":
-        return (
-          <div className="h-auto">
-            <Link to="/home">
-              <p className="my-5">Leasing</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Incoming</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Booking</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Cabang</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Detail Cabang</p>
-            </Link>
-            <Link to="/home">
-              <p className="my-5">Detail Area</p>
-            </Link>
-          </div>
-        );
+    if (activeDropdown === item.title) {
+      switch (item.title) {
+        case "Dashboard":
+          return (
+            <>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm ">MDS</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Area</p>
+              </Link>
+            </>
+          );
+        case "Pooling":
+          return (
+            <>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Kredit</p>
+              </Link>
+
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Leasing</p>
+              </Link>
+            </>
+          );
+        case "Leasing":
+          return (
+            <>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Staff Leasing</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Leasing Target</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Leasing Price List</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Leasing Surveyor</p>
+              </Link>
+            </>
+          );
+        case "Other":
+          return (
+            <>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">OTR Motor</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Promo Sales</p>
+              </Link>
+            </>
+          );
+        case "Master Data":
+          return (
+            <>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Staff</p>
+              </Link>
+              <Link
+                to="/tenor"
+                className={`sidebar-menu-item ${
+                  title === "Tenor"
+                    ? " bg-gray-200 border-gray-100 font-bold"
+                    : ""
+                }`}
+              >
+                <p className="my-2 pl-14 text-sm">Tenor</p>
+              </Link>
+            </>
+          );
+        case "Laporan":
+          return (
+            <>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Leasing</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Incoming</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Booking</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Cabang</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Detail Cabang</p>
+              </Link>
+              <Link to="/home" className="sidebar-menu-item">
+                <p className="my-2 pl-14 text-sm">Detail Area</p>
+              </Link>
+            </>
+          );
+      }
     }
+    return null;
   };
 
   return (
@@ -150,18 +163,19 @@ const Sidebar = () => {
         <p className="ml-1 text-sm text-white font-semibold mt-5 mb-3  z-0">
           Main
         </p>
+
         {MenuItems.map((item, idx) => (
           <div key={idx}>
-            <a
-              onClick={() => handleMenuItemClick(idx)}
+            <Link
+              onClick={() => handleMenuItemClick(item.title)}
               className={`flex items-center px-4 py-2 transition-colors duration-300 transform font-poppins ${
-                activeIndex == idx
+                activeDropdown === item.title
                   ? "bg-white text-blue-600 font-semibold"
-                  : "hover:bg-gray-700 dark:hover:text-gray-200 hover:text-white bg-dark-blue text-white"
+                  : "hover:bg-blue-950 dark:hover:text-gray-200 hover:text-white bg-dark-blue text-white"
               }`}
-              href="#"
+              to={`${item.title === "Beranda" ? "/" : "#"}`}
             >
-              {activeIndex == idx ? (
+              {activeDropdown === item.title ? (
                 <div className="absolute left-0 w-1 h-8 flex-col justify-center items-center inline-flex">
                   <div className="w-1 h-8 bg-blue-600 rounded-tr-[100px] rounded-br-[100px]" />
                 </div>
@@ -169,7 +183,7 @@ const Sidebar = () => {
               {item.Icon}
               <span className="mx-4 text-sm ">{item.title}</span>
               <span className="ml-auto">
-                {activeIndex === idx && item.title !== "Beranda" ? (
+                {item.title !== "Beranda" && activeDropdown === item.title ? (
                   <svg
                     className="w-4 h-4 text-gray-900"
                     fill="none"
@@ -201,12 +215,12 @@ const Sidebar = () => {
                   </svg>
                 ) : null}
               </span>
-            </a>
-            {activeIndex === idx && item.title !== "Beranda" && (
-              <div className="relative left-0 bg-white text-gray-700 p-2 transition-opacity duration-300 opacity-100 px-8">
+            </Link>
+            {activeDropdown === item.title && item.title !== "Beranda" ? (
+              <div className="relative left-0 bg-white py-1 text-gray-700 transition-opacity duration-300 opacity-100  ">
                 {renderMenu(item)}
               </div>
-            )}
+            ) : null}
           </div>
         ))}
       </div>
@@ -222,7 +236,7 @@ const Sidebar = () => {
           className={`flex items-center px-4 py-2 transition-colors duration-300 transform font-poppins ${
             userSetting
               ? "bg-white text-blue-600 font-semibold"
-              : "hover:bg-gray-700 dark:hover:text-gray-200 hover:text-white bg-dark-blue text-white"
+              : "hover:bg-blue-950 dark:hover:text-gray-200 hover:text-white bg-dark-blue text-white"
           }`}
           href="#"
         >
@@ -269,15 +283,15 @@ const Sidebar = () => {
         </a>
       </div>
       {userSetting ? (
-        <div className="relative left-0 bg-white text-gray-700 p-2 transition-opacity duration-300 opacity-100 px-8">
-          <Link to="/home">
-            <p className="my-5">Lihat Profile</p>
+        <div className="relative left-0 bg-white text-gray-700 transition-opacity duration-300 opacity-100 ">
+          <Link to="/home" className="sidebar-menu-item">
+            <p className="my-2 pl-14 text-sm">Lihat Profile</p>
           </Link>
-          <Link to="/home">
-            <p className="my-5">Ganti Password</p>
+          <Link to="/home" className="sidebar-menu-item">
+            <p className="my-2 pl-14 text-sm">Ganti Password</p>
           </Link>
-          <Link to="/home">
-            <p className="my-5">Keluar</p>
+          <Link to="/home" className="sidebar-menu-item">
+            <p className="my-2 pl-14 text-sm">Keluar</p>
           </Link>
         </div>
       ) : null}
