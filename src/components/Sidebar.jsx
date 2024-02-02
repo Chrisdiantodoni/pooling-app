@@ -14,7 +14,7 @@ import {
 } from "@mynaui/icons-react";
 import { Link } from "react-router-dom";
 
-const Sidebar = ({ title, group }) => {
+const Sidebar = ({ title }) => {
   const MenuItems = [
     {
       title: "Beranda",

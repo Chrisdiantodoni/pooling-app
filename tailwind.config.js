@@ -13,6 +13,7 @@ export default {
         info: "#1B59F8",
         success: "#26CC37",
         warning: "#EB993F",
+        yelow: "#FFFF00",
       },
       fontFamily: {
         poppins: "Poppins",
